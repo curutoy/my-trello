@@ -35,12 +35,13 @@ const store = new Vuex.Store({
       state.lists.splice(payload.listIndex, 1)
     },
     addCardToList(state, payload) {
-      console.log('mutation', state, payload)
       state.lists[payload.listIndex].cards.push({ body: payload.body })
     },
     removeCardFromList(state, payload) {
-      console.log(state, payload)
       state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1)
+    },
+    updateList(state, payload) {
+      state.lists = payload.lists
     }
   },
   actions: {
@@ -51,11 +52,13 @@ const store = new Vuex.Store({
       context.commit('removelist', payload)
     },
     addCardToList(context, payload) {
-      console.log('action', context, payload)
       context.commit('addCardToList', payload)
     },
     removeCardFromList(context, payload) {
       context.commit('removeCardFromList', payload)
+    },
+    updateList(context, payload) {
+      context.commit('updateList', payload)
     }
   },
   getters: {
